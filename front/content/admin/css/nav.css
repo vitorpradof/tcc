@@ -1,0 +1,253 @@
+* {
+  font-family: 'Open Sans', sans-serif;
+  font: 'Open Sans';
+}
+
+.myNav {
+  background-color: rgba(0,0,0,0);
+  border-color: rgba(0,0,0,0);
+	border-radius: 0px;
+	padding: 0px 20px;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+.myNav > li > a {
+  color: #ffffff;
+}
+.myNav > li > a:hover,
+.myNav > li > a:focus {
+  color: #ffffff;
+	background-color: #0099e5;
+}
+#tituloNav {
+  font-size: 16px;
+  color: white;
+}
+#itens-menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.dropdown-menu {
+  background-color: #fff;
+  width: auto;
+  z-index: 1000;
+  margin-top: -12px;
+}
+
+.dropdown-menu > li {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-menu > li > a {
+  color: #212529;
+  padding: 8px 20px;
+  width: 100%;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  background-color: #F5F8FB;
+}
+.dropdown-menu > li.divider {
+  background-color: #e9ecef;
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  background-color: #F5F8FB;
+}
+
+/*Ajuste na renderização do dropdown dos itens da navbar superior*/
+#dp-pushNotification {
+  margin-left: -186.5px;
+  width: 250px;
+  padding-left: 15px;
+}
+
+.myNav > .active > a,
+.myNav > .active > a:hover,
+.myNav > .active > a:focus {
+  color: #ffffff;
+  background-color: #0099e5;
+}
+.myNav > .open > a,
+.myNav > .open > a:hover,
+.myNav > .open > a:focus {
+  color: #ffffff;
+  background-color: #0099e5;
+}
+.myNav .myNav-link {
+  color: #ffffff;
+}
+.myNav .myNav-link:hover {
+  color: #ffffff;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:focus,
+.nav-pills > li.active > a:hover {
+  background-color: #fff;
+  border-left-color: #CD1C10;
+  color: #5B6882;
+  font-weight: 600;
+}
+
+.nav-pills > li.active > a > div > i,
+.nav-pills > li.active > a:focus > div > i,
+.nav-pills > li.active > a:hover > div > i {
+  color: #CD1C10;
+}
+
+.nav-pills > li > a {
+  color: #959FAC;
+  display: flex;
+  align-items: flex-end;
+  border-left: 3px solid white;
+}
+
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus,
+.nav-pills > li > a:hover > div > i,
+.nav-pills > li > a:focus > div > i {
+  background-color: #fff;
+  color: #5B6882;
+  font-weight: 600;
+}
+
+.nav-pills > li > a {
+  border-radius: 0px;
+}
+
+.nav-pills > li > a > div > i {
+  color: #959FAC;
+  align-items: center;
+  margin-right: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 20px;
+}
+
+.activeChevron > a > i, .activeChevron > i {
+  transform: rotate(90deg);
+  transition: .5s;
+}
+
+.removeChevron > a > i, .removeChevron > i {
+  transform: rotate(0deg) !important;
+  transition: .5s;
+}
+
+.nav-pills > li > a {
+  color: #959FAC;
+  display: flex;
+  align-items: flex-end;
+  font-size: 16px;
+  border-radius: 0px;
+}
+
+.subMenu > a > li {
+  color: #959FAC;
+  text-decoration: none;
+  padding: 11px 0px 10px 30px;
+}
+
+.subMenu > a:hover,
+.subMenu > a:focus,
+.subMenu > a.active,
+.subMenu > a.active > li  {
+  background-color: #fff;
+  text-decoration: none;
+  color: #5B6882;
+  font-weight: 600;
+}
+
+.collapse.in {
+  background-color: #fff;
+}
+
+.icone-dropdown > li > a {
+  display: flex;
+  align-items: flex-end;
+}
+
+.icone-dropdown > li > a > i {
+  align-items: center;
+}
+
+.itemMenu, .itemMenu:hover, .itemMenu:active, .itemMenu:focus {
+  height: 53px;
+  background-color: rgba(0,0,0,0) !important;
+  display: flex;
+  color: #fff !important;
+  width: auto;
+  padding: 0px;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0px;
+  border: 0px;
+  font-size: 16px;
+  box-shadow: 0 0 0 0;
+  margin-left: 20px;
+}
+
+.itemMenu > i {
+  margin: auto 5px;
+}
+
+.botoesTituloUl {
+  left: -53px;
+  background-color: white !important;
+}
+
+.botoesTituloUl > li > a {
+  color: #484848 !important;
+}
+
+.botoesTituloUl > li:hover {
+  background-color: #ddd;
+}
+
+#botao-menu {
+  font-size: 16px;
+}
+
+.iNvB {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iNvB div {
+  display: flex;
+  align-items: center;
+}
+
+.iNvB div i, .iNvB div img {
+  margin-right: 5px;
+}
+
+.dropdown-menu-arrow:before {
+  position: absolute;
+  z-index: -5;
+  bottom: 100%;
+  right: 33px;
+  display: block;
+  width: 12px;
+  height: 12px;
+  content: '';
+  transform: rotate(-45deg) translateY(12px);
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: none;
+}
+
+#botaoNomeUsuario {
+  min-width: 139px;
+}

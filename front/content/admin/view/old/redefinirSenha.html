@@ -1,0 +1,26 @@
+<main>
+  <div id="container-login">
+    <div id="mensagem-login"></div>
+    <img src="/content/admin/img/logo.png" height="120" alt="Logo" />
+    <div id="conteudo">
+      <form id="form-redefinirSenha" method="post">
+        <h2>Redefinição de senha</h2>
+        <h4>Preencha as informações abaixo para atualizar a sua senha!</h4>
+        <div class="form-group">
+          <input class="form-control input-lg" type="password" name="senha" placeholder="Digite uma senha" required autofocus>
+        </div>
+        <div class="form-group">
+          <input class="form-control input-lg" type="password" name="confirmarSenha" placeholder="Confirme a sua senha" required autofocus>
+        </div>
+        <div class="botao-entrar">
+          <button type="button" onclick="Login.redefinirSenha()" id="btn-redefinirSenha" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Redefinindo" class="btn btn-lg btn-block">REDEFINIR</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <footer>
+    Made with ♥ by <span id="footerLogin-panelConfig"></span> team
+  </footer>
+
+  <script src="/content/admin/js/login.js?v=20102020"></script>
+</main>

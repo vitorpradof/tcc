@@ -1,0 +1,66 @@
+<section class="larguraMaxima">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <div class="aBox box-md">
+        <div><h4>Links do menu no aplicativo</h4><div class="divLineTitle"></div></div>
+        <form id="form-linksMenuAplicativo" method="post">
+          <div class="form-group">
+            <label for="linkFacebook">Id da página do facebook</label>
+            <input type="text" class="form-control" name="linkFacebook" id="linkFacebook" value="Carregando..." disabled />
+            <small>Não sabe o id da sua página? <a href="https://pt.piliapp.com/facebook/id/" target="_blank">Clique aqui</a> e descubra</small>
+          </div>
+          <div class="form-group">
+            <label for="linkInstagram">Perfil do instagram</label>
+            <input type="text" class="form-control" name="linkInstagram" id="linkInstagram" maxlength="255" value="Carregando..." disabled />
+            <small>Insira somente o nome do perfil, sem o @</small>
+          </div>
+          <div class="form-group">
+            <label for="linkSite">Site</label>
+            <input type="text" class="form-control" name="linkSite" id="linkSite" maxlength="255" value="Carregando..." disabled />
+          </div>
+          <div class="form-group">
+            <label for="numeroWhatsApp">Whatsapp</label>
+            <input type="text" class="form-control" name="numeroWhatsApp" id="numeroWhatsApp" maxlength="13" value="Carregando..." disabled />
+            <small>Lembre-se de inserir, antes do número do telefone, o DDI (do Brasil é 55) e o DDD</small>
+          </div>
+          <div class="form-group">
+            <label for="mensagemWhatsApp">Mensagem padrão do whatsapp</label>
+            <textarea class="form-control" rows="3" name="mensagemWhatsApp" id="mensagemWhatsApp" maxlength="128" disabled>Carregando...</textarea>
+          </div>
+          <br/>
+          <button onclick="Aplicativo.atualizarLinks()" id="btn-linksMenuAplicativo" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Aguarde" type="button" disabled>Atualizar</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <div class="aBox box-md" style="background-color: white;">
+        <div style="background-color: white;"><h4>Banner do menu no aplicativo</h4><div class="divLineTitle"></div></div>
+        <form id="form-bannerMenuAplicativo" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="linkFacebook"><span class="perguntaObrigatoria">*</span>Banner</label>
+            <br/>
+            <input type="file" class="file" id="imageBanner" name="banner" accept=".jpg, .jpeg" style="display: none;" />
+            <div id="uploadArea" style="cursor: pointer; background-color: #FAFBFC; border: 1px dashed #d9d9d9; width: 100%; padding: 15px;">
+              <div id="textUpload" style="display: flex; justify-content: center; align-items: center; flex-direction: column;"><i class="fas fa-upload"></i>Clique para alterar</span></div>
+              <img id="fakeImageBanner" src="" alt="Banner do colaborador no aplicativo" width="75%" style="display: none;" />
+            </div>
+            <small>Indicamos que o banner possua as proporções 880x960 pixels</small>
+          </div>
+          <br/>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script src="/content/admin/js/aplicativo.js?v=20102020"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(e) {
+    e.preventDefault();
+    Aplicativo.uploadBanner();
+    Aplicativo.consultar();
+    $('#form-bannerMenuAplicativo').attr('action', `${configSistema.servidor}/colaborador/app/salvar-banner`);
+  });
+</script>

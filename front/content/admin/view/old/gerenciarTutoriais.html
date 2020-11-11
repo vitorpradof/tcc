@@ -1,0 +1,204 @@
+<section class="larguraMaxima">
+  <div class="row">
+    <div class="aBox box-md">
+    <div>
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active" id="liCategorias" onclick="Tutorial.reativarLiCategoria()"><a href="#tabCategorias" aria-controls="tabCategorias" role="tab" data-toggle="tab">Categorias</a></li>
+        <li role="presentation" class="disabled" id="liVideoTutorial"><a href="#tabVideoTutorial">Vídeos</a></li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="tabCategorias">
+        <button class="btn btn-sucesso" onclick="Tutorial.abrirModalCadastrarCategoria()" style="margin-bottom: 5px;"><i class="fas fa-plus"></i> Nova</button>
+        <br/><br/>
+        <div id="progressTabelaCategoria" class="alinhar-centro none"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+        <div id="tableTabelaCategoria"></div>
+        <div id="paginacaoCategoria" style="display: flex; justify-content: center;"><nav aria-label="Page navigation"><ul class="pagination"></ul></nav></div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="tabVideoTutorial">
+        <button class="btn btn-sucesso" onclick="VideoTutorial.abrirModalCadastrarVideoTutorial()" style="margin-bottom: 5px;"><i class="fas fa-plus"></i> Novo</button>
+        <br/><br/>
+        <h4 id="nomeCategoriaSelecionada"></h4>
+        <div id="progressTabelaVideoTutorial" class="alinhar-centro none"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+        <div>
+          <div class="none" id="div-videoTutorialSelecionado">
+            <div class="row">
+              <div class="col-sm-12 col-md-7">
+                <div id="video-videoTutorialSelecionado" width="100%" height="auto"></div>
+              </div>
+              <div class="col-sm-12 col-md-5 info_videoTutorialSelecionado">
+                <h3 id="nome-videoTutorialSelecionado" style="margin: 0 0 20px 0; font-weight: bolder !important;"></h3>
+                <div style="margin-top: 15px;">
+                  <a onclick="VideoTutorial.abrirModalEditarVideoTutorial()"><i class="fas fa-pen"></i> Editar tutorial</a>
+                </div>
+                <div style="margin-top: 15px;">
+                  <a onclick="VideoTutorial.abrirModalExcluirVideoTutorial()"><i class="fas fa-trash"></i> Excluir tutorial</a>
+                </div>
+              </div>
+            </div>
+            <br/>
+          </div>
+          <div id="conteudoVideoTutorial"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade" id="modal-cadastrarVideoTutorial" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Cadastrar tutorial</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-cadastrarVideoTutorial" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nomeCategoria-cadVideoTutorial"><span class="perguntaObrigatoria">*</span>Categoria</label>
+            <input type="hidden" name="tutorialId" id="idCategoria-cadVideoTutorial">
+            <input type="text" class="form-control" id="nomeCategoria-cadVideoTutorial" disabled>
+          </div>
+          <div class="form-group">
+            <label for="nome"><span class="perguntaObrigatoria">*</span>Nome do tutorial</label>
+            <input type="text" class="form-control" name="nome" id="nome" minlength="3" maxlength="60" required />
+          </div>
+          <div class="form-group">
+            <label for="youtube"><span class="perguntaObrigatoria">*</span>Link do vídeo no YouTube</label>
+            <input type="text" class="form-control" name="youtube" id="youtube" minlength="3" placeholder="https://www.youtube.com/watch?v=Kl2cTNMNlSc" maxlength="100" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="VideoTutorial.cadastrar()" id="btn-cadastrarVideoTutorial" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-editarVideoTutorial" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Editar tutorial</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-editarVideoTutorial" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <input type="hidden" name="id" id="editarVideoTutorialId">
+          <div class="form-group">
+            <label for="editarVideoTutorialNome"><span class="perguntaObrigatoria">*</span>Nome do tutorial</label>
+            <input type="text" class="form-control" name="nome" id="editarVideoTutorialNome" minlength="3" maxlength="60" required />
+          </div>
+          <div class="form-group">
+            <label for="editarVideoTutorialYoutube"><span class="perguntaObrigatoria">*</span>Link do vídeo no YouTube</label>
+            <input type="text" class="form-control" name="youtube" id="editarVideoTutorialYoutube" minlength="3" placeholder="https://www.youtube.com/watch?v=Kl2cTNMNlSc" maxlength="100" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="VideoTutorial.editar()" id="btn-editarVideoTutorial" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Editar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-excluirVideoTutorial" tabindex="-1" role="dialog">
+  <div class="modal-dialog modalPersonalizado modalExcluir" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Excluir tutorial</h4>
+      </div>
+      <form id="form-excluirVideoTutorial" method="post">
+        <div class="modal-body">
+          <input type="hidden" name="id" id="excluirVideoTutorialId">
+          <h3>Você tem certeza que deseja excluir esse tutorial? Cuidado, essa ação não poderá ser desfeita!</h3>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" id="btn-cancelarExcluirVideoTutorial" class="btn btn-danger" data-loading-text="Cancelar">Cancelar</button>
+          <button onclick="VideoTutorial.excluir()" id="btn-excluirVideoTutorial" class="btn btn-danger" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Excluir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-cadastrarCategoria" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Cadastrar categoria</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-cadastrarCategoria" method="post">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name"><span class="perguntaObrigatoria">*</span>Nome da categoria</label>
+            <input type="text" class="form-control" name="nome" id="name" minlength="3" maxlength="60" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Tutorial.cadastrar()" id="btn-cadastrarCategoria" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-editarCategoria" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Editar categoria</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-editarCategoria" method="post">
+        <div class="modal-body">
+          <input type="hidden" id="editarCategoriaId" name="id"/>
+          <div class="form-group">
+            <label for="editarCategoriaName"><span class="perguntaObrigatoria">*</span>Nome da categoria</label>
+            <input type="text" class="form-control" name="nome" id="editarCategoriaName" minlength="3" maxlength="60" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Tutorial.editar()" id="btn-editarCategoria" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Editar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-excluirCategoria" tabindex="-1" role="dialog">
+  <div class="modal-dialog modalPersonalizado modalExcluir" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Excluir categoria</h4>
+      </div>
+      <form id="form-excluirCategoria" method="post">
+        <div class="modal-body">
+          <input type="hidden" name="id" id="excluirCategoriaId">
+          <h3>Você tem certeza que deseja excluir essa categoria? Todos os vídeos que estiverem vinculados a ela também serão removidos!</h3>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" id="btn-cancelarExcluirCategoria" class="btn btn-danger" data-loading-text="Cancelar" type="button">Cancelar</button>
+          <button onclick="Tutorial.excluir()" id="btn-excluirCategoria" class="btn btn-danger" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Excluir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/content/admin/js/tutorial.js?v=14092020"></script>
+<script src="/content/admin/js/videoTutorial.js?v=14092020"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(e) {
+    e.preventDefault();
+    Tutorial.consultar();
+  });
+</script>

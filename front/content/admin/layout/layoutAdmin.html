@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+  <title> | Painel Administrativo</title>
+  <link rel="shortcut icon" href="" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css" />
+  <link rel="stylesheet" href="/content/shared/css/normalize.css" />
+  <link rel="stylesheet" href="/content/shared/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/content/admin/css/sweetalert.css" />
+  <link rel="stylesheet" href="/content/admin/css/main.css?v=20102020" />
+  <link rel="stylesheet" href="/content/admin/css/modal.css?v=20102020" />
+  <link rel="stylesheet" href="/content/admin/css/utils.css?v=20102020" />
+  <link rel="stylesheet" href="/content/admin/css/nav.css?v=20102020" />
+  <link rel="stylesheet" href="/content/shared/css/select2.min.css"/>
+  <link rel="stylesheet" href="/content/admin/css/components/input-switch.css?v=20102020" />
+  <link rel="stylesheet" href="/content/admin/css/components/input-check.css?v=20102020" />
+  <link rel="stylesheet" href="/content/admin/css/components/input-radio.css?v=20102020" />
+  <link rel="stylesheet" href="/content/admin/css/components/input-range.css?v=20102020" />
+  <link rel="stylesheet" href="/content/admin/css/components/modal-imagem.css?v=20102020" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!--Notification-->
+  <link rel="stylesheet" href="/content/shared/npm/node_modules/toastr/build/toastr.min.css" />
+  <link rel="stylesheet" href="/content/shared/css/kc.fab.css" />
+  <link rel="stylesheet" href="/content/shared/js/libraries/simpleLightbox/simple-lightbox.css" />
+  <!--Mover os arquivos de CSS-->
+  <link rel="stylesheet" href="/content/shared/js/libraries/datatable/datatables.net-bs/css/dataTables.bootstrap.min.css" />
+  <link rel="stylesheet" href="/content/shared/js/libraries/datatable/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" />
+  <link rel="stylesheet" href="/content/shared/js/libraries/datatable/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" />
+  <link rel="stylesheet" href="/content/shared/js/libraries/datatable/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" />
+  <link rel="stylesheet" href="/content/shared/js/libraries/datatable/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" />
+
+  <script src="/content/shared/js/libraries/jquery.min.js"></script>
+  <script src="/content/shared/js/utils.js?v=20102020"></script>
+  <!--Clipboard -->
+  <script src="/content/shared/js/libraries/clipboard.min.js"></script>
+  <!--Notification-->
+  <script src="/content/shared/npm/node_modules/toastr/build/toastr.min.js"></script>
+  <!--Chart-->
+  <script src="/content/shared/npm/node_modules/chart.js/dist/Chart.min.js"></script>
+  <!-- Configurações do sistema -->
+  <script src="/content/shared/js/config.js?v=20102020"></script>
+  <!-- Bootstrap do sistema -->
+  <script src="/content/shared/js/bootstrap.js"></script>
+  <!-- ADMIN data -->
+  <script src="/content/shared/js/data/adminData.js?v=20102020"></script>
+  <!-- Authentication -->
+  <script src="/content/shared/js/authentication.js?v=20102020"></script>
+  <!-- Simple Lightbox -->
+  <script src="/content/shared/js/libraries/simpleLightbox/simple-lightbox.js"></script>
+</head>
+<body id="contentBody">
+<section id="mainProgress" class="alinhar-centro-linha"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></section>
+<header class="none">
+  <div id="containerNav">
+    <div id="botaoFecharContentNav"><i class="fas fa-times fa-lg"></i></div>
+    <div id="contentNav">
+      <div>
+        <section id="logo">
+          <!-- <a href="/admin/home"><img src="" id="logomenu-panelConfig" alt="Logo" /></a> -->
+        </section>
+        <nav>
+          <ul id="itensMenuHeader" class="nav nav-pills nav-stacked"></ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="none">
+  <div id="divLogadoComColaborador"></div>
+  <section id="gradient">
+    <nav class="myNav">
+      <div id="menu-titulo" class="alinhar-esquerda-centralizar">
+        <div id="icone-menu"><i id="botao-menu" class="fas fa-bars"></i></div>
+        <div id="tituloNav">{{ titulo }}</div>
+      </div>
+      <div id="itens-menu">
+        <div class="dropdown">
+          <button id="botaoNomeUsuario" class="btn btn-default dropdown-toggle itemMenu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fas fa-user-circle"></i> <span id="nomeUsuarioLogado"></span></button>
+          <ul id="dp-usuarioLogado" class="dropdown-menu dropdown-menu-arrow" aria-labelledby="dropdownMenu">
+            <li><a href="/admin/meus-dados">Meus dados</a></li>
+            <li id="minhaAssinatura-dpUsuarioLogado"><a href="/admin/minha-assinatura">Minha assinatura</a></li>
+            <hr/>
+            <li><a onclick="Authentication.logout()">Sair</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </section>
+
+  <section id="conteudoPrincipal" class="alinhar-between">
+    {% include pagina %}
+  </section>
+</main>
+
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+<script src="/content/shared/js/libraries/datatable/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+<script src="/content/shared/js/datatable.js"></script>
+<script src="/content/shared/js/libraries/jquery_form.js"></script>
+<script src="/content/shared/js/libraries/jquery_mask.js"></script>
+<script src="/content/shared/js/libraries/bootstrap.min.js"></script>
+<script src="/content/shared/js/responsive.js?v=20102020"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    Authentication.validaToken();
+  });
+</script>
+</body>
+</html>

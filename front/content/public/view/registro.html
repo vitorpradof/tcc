@@ -1,0 +1,69 @@
+<section class="alinhar-coluna-centro" style="background: linear-gradient(61deg,#003040,#003451 49%,#003466);">
+  <main class="wrapper-registro">
+    <img src="" id="logologin-panelConfig" height="120" alt="Logo" />
+    <p style="margin: 25px 0px; text-align: center; font-weight: bold;">
+      PREENCHA O FORMULÁRIO ABAIXO <br/> PARA SE REGISTRAR!
+    </p>
+    <form id="form-registrarColaborador" method="post" class="form-registro">
+      <div id="pt1-registrarColaborador">
+        <div class="form-group">
+          <label><span class="perguntaObrigatoria">*</span> Vou me cadastrar como uma</label>
+          <div class="row">
+            <div class="col-sm-6">
+              <label style="font-weight: 100;"><input type="radio" onclick="Registrar.mudarTipoPessoa('fisica')" id="pessoaFisica" name="tipoPessoa" checked> pessoa física</label>
+            </div>
+            <div class="col-sm-6">
+              <label style="font-weight: 100;"><input type="radio" onclick="Registrar.mudarTipoPessoa('juridica')" id="pessoaJuridica" name="tipoPessoa"> pessoa jurídica</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name"><span class="perguntaObrigatoria">*</span> Nome</label>
+          <input type="text" class="form-control form-control-registro input-lg" name="primeiroNome" id="name" maxlength="255" required />
+        </div>
+        <div class="form-group">
+          <label for="sobrenome"><span class="perguntaObrigatoria">*</span> Sobrenome</label>
+          <input type="text" class="form-control form-control-registro input-lg" name="ultimoNome" id="sobrenome" maxlength="255" required />
+        </div>
+        <div class="form-group">
+          <label for="documento"><span class="perguntaObrigatoria">*</span><span id="labelDocumento"></span></label>
+          <input type="text" class="form-control form-control-registro input-lg" name="documento" id="documento" required />
+        </div>
+        <div style="display: flex; justify-content: flex-end;">
+          <button onclick="Registrar.mudarEtapa()" class="btn btn-info btn-lg" type="button">Próximo</button>
+        </div>
+      </div>
+      <div id="pt2-registrarColaborador" class="none">
+        <div class="form-group">
+          <label for="email"><span class="perguntaObrigatoria">*</span> E-mail</label>
+          <input type="email" class="form-control form-control-registro input-lg" name="email" id="email" required />
+        </div>
+        <div class="form-group">
+          <label for="login"><span class="perguntaObrigatoria">*</span> Login</label>
+          <input type="text" class="form-control form-control-registro input-lg" name="login" id="login" required />
+        </div>
+        <div class="form-group">
+          <label for="senha"><span class="perguntaObrigatoria">*</span> Senha</label>
+          <input type="password" class="form-control form-control-registro input-lg" name="senha" id="senha" minlength="8" maxlength="16" required />
+        </div>
+        <div class="form-group">
+          <label for="confirmarSenha"><span class="perguntaObrigatoria">*</span> Confirme sua senha</label>
+          <input type="password" class="form-control form-control-registro input-lg" name="confirmarSenha" id="confirmarSenha" minlength="8" maxlength="16" required />
+        </div>
+        <div class="form-group">
+          <a style="font-weight: bold; color: #337ab7; text-decoration: underline; cursor: pointer; text-align: center;" onclick="Registrar.mudarEtapa()">Voltar</a>
+        </div>
+        <button onclick="Registrar.registrar()" id="btn-registrarColaborador" class="btn btn-sucesso btn-lg btn-block btn-registro" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Registrar</button>
+      </div>
+    </form>
+  </main>
+  <footer class="footer-registro">Made with ♥ by <span id="footerLogin-panelConfig"></span> team</footer>
+</section>
+
+<script src="/content/public/js/registrar.js?v=20102020"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(e) {
+    e.preventDefault();
+    Registrar.mudarTipoPessoa("fisica");
+  });
+</script>

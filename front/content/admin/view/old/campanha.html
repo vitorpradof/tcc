@@ -1,0 +1,335 @@
+<section class="larguraMaxima">
+  <div class="row">
+    <div class="aBox box-md">
+    <div>
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active" id="liCampanha" onclick="Campanha.reativarLiCampanha()"><a href="#tabCampanha" aria-controls="tabCampanha" role="tab" data-toggle="tab">Campanhas</a></li>
+        <li role="presentation" class="disabled" id="liPublicacoes"><a href="#tabPublicacoes">Publicações</a></li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="tabCampanhas">
+        <button class="btn btn-sucesso" onclick="Campanha.abrirModalAdicionarCampanha()" style="margin-bottom: 5px;"><i class="fas fa-plus"></i> Nova</button>
+        <br/><br/>
+        <div id="progressTabelaCampanha" class="alinhar-centro none"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+        <div id="tableTabelaCampanha"></div>
+        <div id="paginacaoCampanha" style="display: flex; justify-content: center;"><nav aria-label="Page navigation"><ul class="pagination"></ul></nav></div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="tabPublicacoes">
+        <button class="btn btn-sucesso" onclick="Publicacao.abrirModalAdicionarPublicacao()" style="margin-bottom: 5px;"><i class="fas fa-plus"></i> Nova</button>
+        <br/><br/>
+        <h4 id="nomeCampanhaSelecionada"></h4>
+        <div id="progressTabelaPublicacoes" class="alinhar-centro none"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+        <div>
+          <div class="none" id="div-publicacaoSelecionada">
+            <div class="row">
+              <div class="col-sm-12 col-md-7">
+                <div id="video-publicacaoSelecionada" width="100%" height="auto"></div>
+              </div>
+              <div class="col-sm-12 col-md-5 info_publicacaoSelecionada">
+                <h3 id="nome-publicacaoSelecionada" style="margin: 0 0 20px 0; font-weight: bolder !important;"></h3>
+                <p style="color: #CD1C10"><strong><i class="fas fa-tag"></i> Código: </strong> <span id="codigo-publicacaoSelecionada"></span></p>
+                <p><strong><i class="fas fa-file-alt"></i> Descrição: </strong> <span id="descricao-publicacaoSelecionada"></span></p>
+                <p><strong><i class="fas fa-calendar-alt"></i> Data de expiração: </strong> <span id="dataExpiracao-publicacaoSelecionada"></span></p>
+                <p><strong><i class="fas fa-heart"></i> Curtidas: </strong> <span id="curtidas-publicacaoSelecionada"></span></p>
+                <p><strong><i class="fas fa-eye"></i> Visualizações: </strong> <span id="visualizacao-publicacaoSelecionada"></span></p>
+                <p><strong><i class="fab fa-youtube"></i> Vídeo: </strong> <span id="visualizacao-publicacaoSelecionada"></span> <a onclick="Publicacao.abrirModalEditarVideo()">alterar</a></p>
+                <p><strong><i class="fab fa-youtube-square"></i> Exibir botão do YouTube: </strong> <span id="mostrarBotaoYoutube-publicacaoSelecionada"></span></p>
+                <p><strong><i class="fas fa-expand"></i> Exibir vídeo em tela cheia: </strong> <span id="mostrarVideoTelaCheia-publicacaoSelecionada"></span></p>
+                <p><strong><i class="fas fa-bookmark"></i> Marcador: </strong> <a onclick="Publicacao.verMarcador()">ver</a> ou <a onclick="Publicacao.abrirModalEditarMarcador()">alterar</a></p>
+                <p><strong><i class="fas fa-external-link-square-alt"></i> Link para mais informações: </strong> <span id="linkMaisInfo-publicacaoSelecionada"></span></p>
+                <div id="infoPub">
+                  <div style="width: 50px; height: 3px; background-color: #888; margin-bottom: 10px; border-radius: 5px"></div>
+                  <p><strong><i class="fas fa-info-circle"></i> Status do marcador: </strong> <span id="statusMarcador-publicacaoSelecionada"></span></p>
+                  <p id="verificacaoDuplicidade-publicacaoSelecionada"></p>
+                  <p id="qualidadeMarcador-publicacaoSelecionada"></p>
+                  <p><strong><i class="fas fa-info-circle"></i> Status da publicação: </strong> <span id="statusPublicacao-publicacaoSelecionada"></span></p>
+                </div>
+                <div style="margin-top: 15px;">
+                  <a onclick="Publicacao.abrirModalEditarPublicacao()"><i class="fas fa-pen"></i> Editar publicação</a>
+                </div>
+                <div style="margin-top: 15px;">
+                  <a onclick="Publicacao.abrirModalExcluirPublicacao()"><i class="fas fa-trash"></i> Excluir publicação</a>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="alinhar-centro">
+              <h4 onclick="Publicacao.mudarIcone(this)" class="animated infinite pulse delay-2s pointer" data-toggle="collapse" data-target="#moreInfo"> <i id="iconeSeta" class="fas fa-chevron-down"></i> Mais informações</h4>
+            </div>
+            <div id="moreInfo" class="collapse">
+              <h5>Histórico de interações</h5>
+              <div id="progress-chartHistory" class="alinhar-centro"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+              <canvas id="graph-chartHistory" height="100"></canvas>
+            </div>
+            <br/><hr/><br/>
+          </div>
+          <div id="conteudoPublicacoes"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade" id="modal-cadastrarPublicacao" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Cadastrar publicação</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-cadastrarPublicacao" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nomeCampanha-cadPublicacao"><span class="perguntaObrigatoria">*</span>Campanha</label>
+            <input type="hidden" name="campanhaId" id="idCampanha-cadPublicacao">
+            <input type="text" class="form-control" id="nomeCampanha-cadPublicacao" disabled>
+          </div>
+          <div class="form-group">
+            <label for="name"><span class="perguntaObrigatoria">*</span>Nome da publicação</label>
+            <input type="text" class="form-control" name="nome" id="name" minlength="3" maxlength="60" required />
+          </div>
+          <div class="form-group">
+            <label for="dataExpiracao-cadPublicacao">Data de expiração</label>
+            <input type="date" class="form-control" name="dataExpiracao" id="dataExpiracao-cadPublicacao" />
+            <small>Preencha este campo caso queira que a publicação tenha uma data de expiração</small>
+          </div>
+          <div class="form-group">
+            <input type="file" class="file" id="imageMarker" name="imageMarker" accept=".jpg, .jpeg" style="display: none;" />
+            <label for="descricao"><span class="perguntaObrigatoria">*</span>Marcador</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="fakeimageMarker" readonly placeholder="Clique no botão para adicionar" required>
+              <span class="input-group-btn">
+                <button class="buttonimageMarker btn btn-info" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+              </span>
+            </div>
+            <small>Só arquivos com a extensão .JPG ou .JPEG são permitidos</small>
+          </div>
+          <input type="hidden" name="abrirNoYoutube" id="abrirNoYoutube-cadPublicacao" value="false">
+          <div id="div-video"></div>
+          <div class="form-group">
+            <label for="linkMaisInfo">Link para mais informações</label>
+            <input type="text" class="form-control" name="linkMaisInfo" id="linkMaisInfo" />
+          </div>
+          <div class="form-group" id="div-fullscreen"></div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Publicacao.cadastrar()" id="btn-cadastrarPublicacao" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-editarPublicacao" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Editar publicação</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-editarPublicacao" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nomeCampanha-editarPublicacao"><span class="perguntaObrigatoria">*</span>Campanha</label>
+            <input type="hidden" name="id" id="editarPublicacaoId">
+            <input type="text" class="form-control" id="editarPublicacaoNome" disabled>
+          </div>
+          <div class="form-group">
+            <label for="editarPublicacaoName"><span class="perguntaObrigatoria">*</span>Nome da publicação</label>
+            <input type="text" class="form-control" name="nome" id="editarPublicacaoName" minlength="3" maxlength="60" required />
+          </div>
+          <div class="form-group">
+            <label for="editarPublicacaoDataExpiracao">Data de expiração</label>
+            <input type="date" class="form-control" name="dataExpiracao" id="editarPublicacaoDataExpiracao" />
+            <small>Preencha este campo caso queira que a publicação tenha uma data de expiração</small>
+          </div>
+          <div class="form-group">
+            <label for="editarPublicacaoLinkMaisInfo">Link para mais informações</label>
+            <input type="text" class="form-control" name="linkMaisInfo" id="editarPublicacaoLinkMaisInfo" />
+          </div>
+          <div class="form-group" id="div-editarFullscreen"></div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Publicacao.editar()" id="btn-editarPublicacao" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Editar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-editarVideo" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Atualizar vídeo</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-editarVideo" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <input type="hidden" name="id" id="editarVideoId">
+          <input type="hidden" name="abrirNoYoutube" id="abrirNoYoutube-editarVideo" value="false">
+          <div id="div-editarVideo"></div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Publicacao.editarVideo()" id="btn-editarVideo" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Atualizar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-editarMarcador" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Atualizar marcador</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-editarMarcador" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <input type="hidden" name="id" id="editarMarcadorId">
+          <div class="form-group">
+            <input type="file" class="file" id="editarMarcador" name="imageMarker" accept=".jpg, .jpeg" style="display: none;" />
+            <label for="descricao"><span class="perguntaObrigatoria">*</span>Marcador</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="fakeeditarMarcador" readonly placeholder="Clique no botão para adicionar" required>
+              <span class="input-group-btn">
+                <button class="buttoneditarMarcador btn btn-info" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+              </span>
+            </div>
+            <small>Só arquivos com a extensão .JPG ou .JPEG são permitidos</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Publicacao.editarMarcador()" id="btn-editarMarcador" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Atualizar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-excluirPublicacao" tabindex="-1" role="dialog">
+  <div class="modal-dialog modalPersonalizado modalExcluir" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Excluir publicação</h4>
+      </div>
+      <form id="form-excluirPublicacao" method="post">
+        <div class="modal-body">
+          <input type="hidden" name="id" id="excluirPublicacaoId">
+          <h3>Você tem certeza que deseja excluir essa publicação? Cuidado, essa ação não poderá ser desfeita!</h3>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" id="btn-cancelarExcluirPublicacao" class="btn btn-danger" data-loading-text="Cancelar">Cancelar</button>
+          <button onclick="Publicacao.excluir()" id="btn-excluirPublicacao" class="btn btn-danger" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Excluir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="modal-ampliarImagem">
+  <span class="close" onclick="Publicacao.fecharModalMarcador()">&times;</span>
+  <img class="modal-conteudo" id="img01">
+</div>
+
+<div class="modal fade" id="modal-lightbox" tab-index="-1" role="dialog">
+  <div class="container">
+    <div class="gallery">
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-cadastrarCampanha" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Cadastrar campanha</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-cadastrarCampanha" method="post">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name"><span class="perguntaObrigatoria">*</span>Nome da campanha</label>
+            <input type="text" class="form-control" name="nome" id="name" minlength="3" maxlength="60" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Campanha.cadastrar()" id="btn-cadastrarCampanha" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-editarCampanha" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Editar campanha</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-editarCampanha" method="post">
+        <div class="modal-body">
+          <input type="hidden" id="editarCampanhaId" name="id"/>
+          <div class="form-group">
+            <label for="editarCampanhaName"><span class="perguntaObrigatoria">*</span>Nome da campanha</label>
+            <input type="text" class="form-control" name="nome" id="editarCampanhaName" minlength="3" maxlength="60" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Campanha.editar()" id="btn-editarCampanha" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Editar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-excluirCampanha" tabindex="-1" role="dialog">
+  <div class="modal-dialog modalPersonalizado modalExcluir" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Excluir campanha</h4>
+      </div>
+      <form id="form-excluirCampanha" method="post">
+        <div class="modal-body">
+          <input type="hidden" name="id" id="excluirCampanhaId">
+          <h3>Você tem certeza que deseja excluir essa campanha? Todas as publicações que estiverem vinculadas a ela também serão removidas!</h3>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" id="btn-cancelarExcluirCampanha" class="btn btn-danger" data-loading-text="Cancelar" type="button">Cancelar</button>
+          <button onclick="Campanha.excluir()" id="btn-excluirCampanha" class="btn btn-danger" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Excluir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/content/admin/js/campanhas.js?v=20102020"></script>
+<script src="/content/admin/js/home.js?v=20102020"></script>
+<script src="/content/admin/js/publicacoes.js?v=20102020"></script>
+<script src="/content/admin/js/grafico-historico.js?v=20102020"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(e) {
+    e.preventDefault();
+    let id = location.search.slice(1).split("=")[1];
+    if (id) {
+      Publicacao.consultarPublicacaoEspecifica(id);
+    }
+    Campanha.consultar();
+    Publicacao.uploadSpreadsheet(["imageMarker", "video", "editarMarcador", "editarVideo"]);
+    $('#form-cadastrarPublicacao').attr('action', `${configSistema.servidor}/colaborador/campanha/publicacao`);
+    $('#form-editarVideo').attr('action', `${configSistema.servidor}/colaborador/campanha/publicacao/atualizar-video`);
+    $('#form-editarMarcador').attr('action', `${configSistema.servidor}/colaborador/campanha/publicacao/atualizar-marcador`);
+  });
+</script>

@@ -1,0 +1,35 @@
+.kanban-board {
+  background-color: #F1F1F1 !important;
+  border-radius: 25px;
+}
+
+.kanban-board-header {
+   background-color: #F1F1F1;
+   box-shadow: 0 0 0 0; 
+   z-index: 1; 
+   height: auto; 
+   width: auto; 
+   position: initial;  
+}
+
+main.kanban-drag {
+  margin-left: 0px !important;
+  width: auto !important;
+  background-color: #F7FAFC;
+}
+
+.kanban-board .kanban-drag {
+  background-color: #F1F1F1 !important;
+}
+
+.kanban-item {
+  padding: 15px !important;
+  box-shadow: 1px 0px 8px rgba(0,0,0,.08);
+  border: 0 none;
+  border-radius: 25px;
+  cursor: initial !important;
+}
+
+.kanban-container footer {
+  display: none;
+}

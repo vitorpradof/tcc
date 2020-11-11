@@ -1,0 +1,486 @@
+<section class="larguraMaxima">
+  <div class="row none" id="row-minhaAssinatura">
+    <div class="col-sm-6">
+      <div class="aBox box-md">
+        <div><h4>Minha assinatura</h4><div class="divLineTitle"></div></div>
+        <div id="div-minhaAssinatura" class="alinhar-coluna">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td>Plano contratado</td>
+                <td><span id="nome-minhaAssinatura"></span></td>
+              </tr>
+              <tr>
+                <td>Cota contratada</td>
+                <td><span id="cota-minhaAssinatura"></span></td>
+              </tr>
+              <tr>
+                <td>Valor do plano</td>
+                <td>R$ <span id="valor-minhaAssinatura"></span></td>
+              </tr>
+              <tr>
+                <td>Cartão</td>
+                <td><span id="cartao-minhaAssinatura"></span></td>
+              </tr>
+              <tr>
+                <td>Bandeira do cartão</td>
+                <td><span id="bandeira-minhaAssinatura"></span></td>
+              </tr>
+              <tr class="none">
+                <td>Data de contratação</td>
+                <td><span id="contratacao-minhaAssinatura"></span></td>
+              </tr>
+              <tr>
+                <td>Data do vencimento</td>
+                <td><span id="vencimento-minhaAssinatura"></span></td>
+              </tr>
+              <tr class="none">
+                <td>Data do cancelamento</td>
+                <td><span id="cancelamento-minhaAssinatura" style="color: #f5365c"></span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-bottom: 20px;">
+            <button class="btn btn-danger" id="btn-abrirModalEncerrarAssinatura" onclick="MinhaAssinatura.abrirModalEncerrarAssinatura()">Encerrar assinatura</button>
+            <button class="btn btn-editar" id="btn-alterarAssinatura" onclick="MinhaAssinatura.abrirDivPlanos()">Mudar plano</button>
+            <button class="btn btn-info" id="btn-abrirModalAlterarCartao" onclick="MinhaAssinatura.abrirModalCriarAssinatura()">Alterar cartão</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="aBox box-md">
+        <div><h4>Cota extra</h4><div class="divLineTitle"></div></div>
+        <div class="alinhar-coluna">
+          <table class="table table-bordered">
+            <tbody id="cotaExtra-minhaAssinatura"></tbody>
+          </table>
+          <div style="margin-bottom: 20px;" id="botoesCotaExtra-minhaAssinatura" class="none">
+            <button class="btn btn-sucesso" id="btn-abrirModalCotaExtra" onclick="MinhaAssinatura.abrirModalInserirCotaExtra()">Contratar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row none" id="row-planos">
+    <div class="col-sm-12">
+      <div class="aBox box-md">
+        <div><h4>Planos disponíveis</h4><div class="divLineTitle"></div></div>
+        <div id="progressPlanos" class="alinhar-centro none"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+        <div id="div-planos" class="row" style="margin-bottom: 20px; display: flex; align-items: center; flex-wrap: wrap;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade" id="modal-contratarPlano" tabindex="-1" role="dialog">
+  <div class="modal-dialog modalPersonalizado modalInfo" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Contratar plano</h4>
+      </div>
+      <form id="form-contratarPlano" method="post">
+        <div class="modal-body">
+          <input type="hidden" name="planoId" id="id-contratarPlano">
+          <h3 id="texto-contratarPlano">Você tem certeza que deseja contratar o plano <strong><span id="plano-contratarPlano"></span></strong>? Uma cobrança no valor de <strong>R$ <span id="valor-contratarPlano"></span></strong> será gerada!</h3>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" id="btn-cancelarcontratarPlano" class="btn btn-info" style="box-shadow: 0 0 0 0 !important;" data-loading-text="Cancelar" type="button">Cancelar</button>
+          <button onclick="MinhaAssinatura.contratarPlano('contratarPlano')" id="btn-contratarPlano" class="btn btn-info" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Contratar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-encerrarAssinatura" tabindex="-1" role="dialog">
+  <div class="modal-dialog modalPersonalizado modalExcluir" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Encerrar assinatura</h4>
+      </div>
+      <form id="form-excluirCampanha" method="post">
+        <div class="modal-body">
+          <input type="hidden" name="id" id="excluirCampanhaId">
+          <h3>Você tem certeza que deseja encerrar a sua assinatura? A partir do vencimento você não terá mais acesso ao sistema!</h3>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" id="btn-cancelarEncerrarAssinatura" class="btn btn-danger" data-loading-text="Cancelar" type="button">Cancelar</button>
+          <button onclick="MinhaAssinatura.encerrarAssinatura()" id="btn-encerrarAssinatura" class="btn btn-danger" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Excluir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-faltamDados" tabindex="-1" role="dialog">
+  <div class="modal-dialog modalPersonalizado" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Dados incompletos</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id" id="excluirCampanhaId">
+        <h3>Não conseguimos encontrar o seu CPF no sistema! Clique no botão abaixo para atualizar as suas informações.</h3>
+      </div>
+      <div class="modal-footer">
+        <a href="/admin/meus-dados" class="btn btn-info">Atualizar informações</a>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-pagarDiferenca" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Pagamento por cartão de crédito</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-pagarDiferenca" method="post">
+        <div class="modal-body">
+          <p id="texto-pagarDiferenca"></p>
+          <p>Insira abaixo as informações do seu cartão de crédito para que a cobrança possa ser efetuada. <strong>Fique tranquilo (a), os seus dados não serão armazenados!</strong></p>
+          <br/>
+          <div id="dadosTitular-pagarDiferenca">
+            <h5 style="text-transform: uppercase; font-weight: 600;">Dados do titular</h5>
+            <input type="hidden" name="id" id="id-pagarDiferenca" />
+            <input type="hidden" name="ip" id="ip-pagarDiferenca" />
+            <div class="form-group">
+              <label><span class="perguntaObrigatoria">*</span> Eu sou uma</label>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label style="font-weight: 100;"><input type="radio" onclick="MinhaAssinatura.mudarTipoPessoa('fisica', 'pagarDiferenca')" name="tipoPessoa"checked> pessoa física</label>
+                </div>
+                <div class="col-sm-6">
+                  <label style="font-weight: 100;"><input type="radio" onclick="MinhaAssinatura.mudarTipoPessoa('juridica', 'pagarDiferenca')" name="tipoPessoa"> pessoa jurídica</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="nomeTitular-pagarDiferenca"><span class="perguntaObrigatoria">*</span>Nome do titular</label>
+              <input type="text" class="form-control" name="nomeTitular" id="nomeTitular-pagarDiferenca" maxlength="100" required />
+            </div>
+            <div class="form-group">
+              <label for="documento-pagarDiferenca"><span class="perguntaObrigatoria">*</span><span id="labelDocumento-pagarDiferenca">CPF</span></label>
+              <input type="text" class="form-control" name="documento" id="documento-pagarDiferenca" required />
+            </div>
+            <div class="form-group">
+              <label for="email-pagarDiferenca"><span class="perguntaObrigatoria">*</span>E-mail</label>
+              <input type="email" class="form-control" name="email" id="email-pagarDiferenca" required />
+            </div>
+            <div class="form-group">
+              <label for="cep-pagarDiferenca"><span class="perguntaObrigatoria">*</span>CEP</label>
+              <input type="text" class="form-control" name="cep" id="cep-pagarDiferenca" required />
+            </div>
+            <div class="form-group">
+              <label for="numEndereco-pagarDiferenca"><span class="perguntaObrigatoria">*</span>Número do seu endereço</label>
+              <input type="number" class="form-control" name="numEndereco" id="numEndereco-pagarDiferenca" required />
+            </div>
+            <div class="form-group">
+              <label for="telefone-pagarDiferenca"><span class="perguntaObrigatoria">*</span>Telefone</label>
+              <input type="text" class="form-control" name="telefone" id="telefone-pagarDiferenca" required />
+            </div>
+          </div>
+          <div id="dadosCartao-pagarDiferenca" class="none">
+            <h5 style="text-transform: uppercase; font-weight: 600;">Dados do cartão</h5>
+            <div class="form-group">
+              <label for="nomeCartao-pagarDiferenca"><span class="perguntaObrigatoria">*</span>Nome no cartão</label>
+              <input type="text" class="form-control" name="nomeCartao" id="nomeCartao-pagarDiferenca" required />
+            </div>
+            <div class="form-group">
+              <label for="numero-pagarDiferenca"><span class="perguntaObrigatoria">*</span>Número</label>
+              <input type="number" class="form-control" name="numero" id="numero-pagarDiferenca" maxlength="16" required />
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="mesExp-pagarDiferenca"><span class="perguntaObrigatoria">*</span>Mês</label>
+                  <select id="mesExp-pagarDiferenca" class="form-control" name="mesExp" required>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                  </select>
+                </div>
+                <div class="col-sm-6">
+                  <label for="anoExp-pagarDiferenca"><span class="perguntaObrigatoria">*</span>Ano</label>
+                  <select id="anoExp-pagarDiferenca" class="form-control" name="anoExp" required></select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ccv-pagarDiferenca"><span class="perguntaObrigatoria">*</span>Código (CCV)</label>
+              <input type="text" class="form-control" name="ccv" id="ccv-pagarDiferenca" minlength="3" maxlength="3" required />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div id="modalFooterTitular-pagarDiferenca">
+            <button onclick="MinhaAssinatura.preencherDadosCartao('pagarDiferenca')" class="btn btn-info" type="button">Próximo</button>
+          </div>
+          <div id="modalFooterDadosCartao-pagarDiferenca" class="none">
+            <button onclick="MinhaAssinatura.preencherDadosCartao('pagarDiferenca')" id="btn-cancelarpagarDiferenca" class="btn btn-info" style="box-shadow: 0 0 0 0 !important;" data-loading-text="Voltar" type="button">Voltar</button>
+            <button onclick="MinhaAssinatura.contratarPlano('pagarDiferenca')" id="btn-pagarDiferenca" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Cadastrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-criarAssinatura" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Alteração do cartão para cobrança automática</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-criarAssinatura" method="post">
+        <div class="modal-body">
+          <p>Altere o seu cartão de crédito para a cobrança automática.<strong> Fique tranquilo (a), os seus dados não serão armazenados!</strong></p>
+          <br/>
+          <div id="dadosTitular-criarAssinatura">
+            <h5 style="text-transform: uppercase; font-weight: 600;">Dados do titular</h5>
+            <input type="hidden" name="ip" id="ip-criarAssinatura" />
+            <div class="form-group">
+              <label><span class="perguntaObrigatoria">*</span>Sou uma</label>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label style="font-weight: 100;"><input type="radio" onclick="MinhaAssinatura.mudarTipoPessoa('fisica', 'criarAssinatura')" name="tipoPessoa" checked> pessoa física</label>
+                </div>
+                <div class="col-sm-6">
+                  <label style="font-weight: 100;"><input type="radio" onclick="MinhaAssinatura.mudarTipoPessoa('juridica', 'criarAssinatura')" name="tipoPessoa"> pessoa jurídica</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="nomeTitular-criarAssinatura"><span class="perguntaObrigatoria">*</span>Nome do titular</label>
+              <input type="text" class="form-control" name="nomeTitular" id="nomeTitular-criarAssinatura" maxlength="100" required />
+            </div>
+            <div class="form-group">
+              <label for="documento-criarAssinatura"><span class="perguntaObrigatoria">*</span><span id="labelDocumento-criarAssinatura">CPF</span></label>
+              <input type="text" class="form-control" name="documento" id="documento-criarAssinatura" required />
+            </div>
+            <div class="form-group">
+              <label for="email-criarAssinatura"><span class="perguntaObrigatoria">*</span>E-mail</label>
+              <input type="email" class="form-control" name="email" id="email-criarAssinatura" required />
+            </div>
+            <div class="form-group">
+              <label for="cep-criarAssinatura"><span class="perguntaObrigatoria">*</span>CEP</label>
+              <input type="text" class="form-control" name="cep" id="cep-criarAssinatura" required />
+            </div>
+            <div class="form-group">
+              <label for="numEndereco-criarAssinatura"><span class="perguntaObrigatoria">*</span>Número do seu endereço</label>
+              <input type="number" class="form-control" name="numEndereco" id="numEndereco-criarAssinatura" required />
+            </div>
+            <div class="form-group">
+              <label for="telefone-criarAssinatura"><span class="perguntaObrigatoria">*</span>Telefone</label>
+              <input type="text" class="form-control" name="telefone" id="telefone-criarAssinatura" required />
+            </div>
+          </div>
+          <div id="dadosCartao-criarAssinatura" class="none">
+            <h5 style="text-transform: uppercase; font-weight: 600;">Dados do cartão</h5>
+            <div class="form-group">
+              <label for="nomeCartao-criarAssinatura"><span class="perguntaObrigatoria">*</span>Nome no cartão</label>
+              <input type="text" class="form-control" name="nomeCartao" id="nomeCartao-criarAssinatura" required />
+            </div>
+            <div class="form-group">
+              <label for="numero-criarAssinatura"><span class="perguntaObrigatoria">*</span>Número</label>
+              <input type="number" class="form-control" name="numero" id="numero-criarAssinatura" maxlength="16" required />
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="mesExp-criarAssinatura"><span class="perguntaObrigatoria">*</span>Mês</label>
+                  <select id="mesExp-criarAssinatura" class="form-control" name="mesExp" required>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                  </select>
+                </div>
+                <div class="col-sm-6">
+                  <label for="anoExp-criarAssinatura"><span class="perguntaObrigatoria">*</span>Ano</label>
+                  <select id="anoExp-criarAssinatura" class="form-control" name="anoExp" required></select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ccv-criarAssinatura"><span class="perguntaObrigatoria">*</span>Código (CCV)</label>
+              <input type="text" class="form-control" name="ccv" id="ccv-criarAssinatura" minlength="3" maxlength="3" required />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div id="modalFooterTitular-criarAssinatura">
+            <button onclick="MinhaAssinatura.preencherDadosCartao('criarAssinatura')" class="btn btn-info" type="button">Próximo</button>
+          </div>
+          <div id="modalFooterDadosCartao-criarAssinatura" class="none">
+            <button onclick="MinhaAssinatura.preencherDadosCartao('criarAssinatura')" id="btn-cancelarcriarAssinatura" class="btn btn-info" style="box-shadow: 0 0 0 0 !important;" data-loading-text="Voltar" type="button">Voltar</button>
+            <button onclick="MinhaAssinatura.criarAssinatura()" id="btn-criarAssinatura" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Cadastrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-inserirCotaExtra" tabindex="-1" role="dialog">
+  <div class="modal-dialog modalPersonalizado" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Contratar publicações extras</h4>
+      </div>
+      <div class="modal-body">
+        <h4 style="text-align: center;">Insira abaixo a quantidade de publicações extras que você deseja contratar. O valor unitário de cada publicação extra é de <span id="valor-inserirCotaExtra"></span>!</h4>
+        <div class="form-group">
+          <label for="numero-inserirCotaExtra"><span class="perguntaObrigatoria">*</span>Quantidade</label>
+          <input type="number" class="form-control" name="numero-inserirCotaExtra" id="numero-inserirCotaExtra" min="1" onkeyup="MinhaAssinatura.previaTotalPublicacoesExtrasContratadas('numero-inserirCotaExtra')">
+          <p style="font-size: 16px; font-weight: 600; text-align: right; margin-top: 5px;" id="total-inserirCotaExtra"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="MinhaAssinatura.abrirModalCotaExtra()" id="btn-inserirCotaExtra" class="btn btn-info" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Contratar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-cotaExtra" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Pagamento das publicações extras</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-cotaExtra" method="post">
+        <div class="modal-body">
+          <p>Você está prestes a contratar <span id="qtd-cotaExtra"></span> publicações por <span id="valorTotal-cotaExtra"></span>. Essas publicações ficarão ativas por 1 mês após a data do pagamento.</p>
+          <p>Insira abaixo as informações do seu cartão de crédito para que a cobrança possa ser efetuada. <strong>Fique tranquilo (a), os seus dados não serão armazenados!</strong></p>
+          <br/>
+          <div id="dadosTitular-cotaExtra">
+            <h5 style="text-transform: uppercase; font-weight: 600;">Dados do titular</h5>
+            <input type="hidden" name="numCotas" id="numCotas-cotaExtra" />
+            <input type="hidden" name="ip" id="ip-cotaExtra" />
+            <div class="form-group">
+              <label><span class="perguntaObrigatoria">*</span>Sou uma</label>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label style="font-weight: 100;"><input type="radio" onclick="MinhaAssinatura.mudarTipoPessoa('fisica', 'cotaExtra')" name="tipoPessoa" checked> pessoa física</label>
+                </div>
+                <div class="col-sm-6">
+                  <label style="font-weight: 100;"><input type="radio" onclick="MinhaAssinatura.mudarTipoPessoa('juridica', 'cotaExtra')" name="tipoPessoa"> pessoa jurídica</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="nomeTitular-cotaExtra"><span class="perguntaObrigatoria">*</span>Nome do titular</label>
+              <input type="text" class="form-control" name="nomeTitular" id="nomeTitular-cotaExtra" maxlength="100" required />
+            </div>
+            <div class="form-group">
+              <label for="documento-cotaExtra"><span class="perguntaObrigatoria">*</span><span id="labelDocumento-cotaExtra">CPF</span></label>
+              <input type="text" class="form-control" name="documento" id="documento-cotaExtra" required />
+            </div>
+            <div class="form-group">
+              <label for="email-cotaExtra"><span class="perguntaObrigatoria">*</span>E-mail</label>
+              <input type="email" class="form-control" name="email" id="email-cotaExtra" required />
+            </div>
+            <div class="form-group">
+              <label for="cep-cotaExtra"><span class="perguntaObrigatoria">*</span>CEP</label>
+              <input type="text" class="form-control" name="cep" id="cep-cotaExtra" required />
+            </div>
+            <div class="form-group">
+              <label for="numEndereco-cotaExtra"><span class="perguntaObrigatoria">*</span>Número do seu endereço</label>
+              <input type="number" class="form-control" name="numEndereco" id="numEndereco-cotaExtra" required />
+            </div>
+            <div class="form-group">
+              <label for="telefone-cotaExtra"><span class="perguntaObrigatoria">*</span>Telefone</label>
+              <input type="text" class="form-control" name="telefone" id="telefone-cotaExtra" required />
+            </div>
+          </div>
+          <div id="dadosCartao-cotaExtra" class="none">
+            <h5 style="text-transform: uppercase; font-weight: 600;">Dados do cartão</h5>
+            <div class="form-group">
+              <label for="nomeCartao-cotaExtra"><span class="perguntaObrigatoria">*</span>Nome no cartão</label>
+              <input type="text" class="form-control" name="nomeCartao" id="nomeCartao-cotaExtra" required />
+            </div>
+            <div class="form-group">
+              <label for="numero-cotaExtra"><span class="perguntaObrigatoria">*</span>Número</label>
+              <input type="number" class="form-control" name="numero" id="numero-cotaExtra" maxlength="16" required />
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="mesExp-cotaExtra"><span class="perguntaObrigatoria">*</span>Mês</label>
+                  <select id="mesExp-cotaExtra" class="form-control" name="mesExp" required>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                  </select>
+                </div>
+                <div class="col-sm-6">
+                  <label for="anoExp-cotaExtra"><span class="perguntaObrigatoria">*</span>Ano</label>
+                  <select id="anoExp-cotaExtra" class="form-control" name="anoExp" required></select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ccv-cotaExtra"><span class="perguntaObrigatoria">*</span>Código (CCV)</label>
+              <input type="text" class="form-control" name="ccv" id="ccv-cotaExtra" minlength="3" maxlength="3" required />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div id="modalFooterTitular-cotaExtra">
+            <button onclick="MinhaAssinatura.preencherDadosCartao('cotaExtra')" class="btn btn-info" type="button">Próximo</button>
+          </div>
+          <div id="modalFooterDadosCartao-cotaExtra" class="none">
+            <button onclick="MinhaAssinatura.preencherDadosCartao('cotaExtra')" id="btn-cancelarcotaExtra" class="btn btn-info" style="box-shadow: 0 0 0 0 !important;" data-loading-text="Voltar" type="button">Voltar</button>
+            <button onclick="MinhaAssinatura.contratarCotaExtra()" id="btn-cotaExtra" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Cadastrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/content/admin/js/minhaAssinatura.js?v=20102020"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(e) {
+    e.preventDefault();
+    MinhaAssinatura.consultarColaborador();
+  });
+</script>

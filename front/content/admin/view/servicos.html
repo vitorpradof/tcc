@@ -1,0 +1,175 @@
+<section class="larguraMaxima">
+  <div class="row">
+    <div class="aBox box-md">
+      <button class="btn btn-sucesso" onclick="Servicos.abrirModalAdicionarServico()" style="margin-bottom: 5px; margin-left: 20px; margin-top: 10px;"><i class="fas fa-plus"></i> Novo</button>
+      <div id="progressServicos" class="alinhar-centro none"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+      <div id="tabelaServicos" class="tableWithoutPadding"></div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade" id="modal-cadastrarServicos" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Cadastrar serviços</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-cadastrarColaborador" method="post">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nome"><span class="perguntaObrigatoria">*</span>Nome</label>
+            <input type="text" class="form-control" name="nome" id="nome" maxlength="255" required />
+          </div>
+          <div class="form-group">
+            <label for="descricao"><span class="perguntaObrigatoria">*</span>Descrição</label>
+            <textarea class="form-control" name="descricao" id="descricao" maxlength="255" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="video"><span class="perguntaObrigatoria">*</span>Vídeo</label>
+            <input type="text" class="form-control" name="video" id="video" required />
+          </div>
+          <div class="form-group">
+            <label for="linkDocumentacao"><span class="perguntaObrigatoria">*</span>Link da documentação</label>
+            <input type="text" class="form-control" name="linkDocumentacao" id="linkDocumentacao" required />
+          </div>
+          <div class="form-group">
+            <label for="linkRepositorio"><span class="perguntaObrigatoria">*</span>Link do repositório</label>
+            <input type="text" class="form-control" name="linkRepositorio" id="linkRepositorio" required />
+          </div>
+          <div class="form-group">
+            <input type="file" class="file" id="icone" name="icone" accept=".jpg, .jpeg" style="display: none;" />
+            <label for="descricao"><span class="perguntaObrigatoria">*</span>Ícone</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="fakeicone" readonly placeholder="Clique no botão para adicionar" required>
+              <span class="input-group-btn">
+                <button class="buttonicone btn btn-info" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+              </span>
+            </div>
+            <small>Só arquivos com a extensão .JPG ou .JPEG são permitidos</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="" id="btn-cadastrarServico" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-editarSenhaColaborador" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Editar senha</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-editarSenhaColaborador" method="post">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="login-editarSenhaColaborador"><span class="perguntaObrigatoria">*</span>Login</label>
+            <input type="text" class="form-control" name="login" id="login-editarSenhaColaborador" readonly required />
+          </div>
+          <div class="form-group">
+            <label for="senha-editarSenhaColaborador"><span class="perguntaObrigatoria">*</span>Senha</label>
+            <input type="password" class="form-control" name="senha" id="senha-editarSenhaColaborador" minlength="8" maxlength="16" required />
+          </div>
+          <div class="form-group">
+            <label for="confirmarSenha-editarSenhaColaborador"><span class="perguntaObrigatoria">*</span>Confirmar senha</label>
+            <input type="password" class="form-control" name="confirmarSenha" id="confirmarSenha-editarSenhaColaborador" minlength="8" maxlength="16" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Colaborador.editarSenha()" id="btn-editarSenhaColaborador" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Editar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-editarColaborador" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Editar colaborador</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-editarColaborador" method="post">
+        <div class="modal-body">
+          <input type="hidden" name="id" id="editarColaboradorId" required />
+          <div class="form-group">
+            <label for="editarColaboradorName"><span class="perguntaObrigatoria">*</span>Nome</label>
+            <input type="text" class="form-control" name="name" id="editarColaboradorName" maxlength="255" required />
+          </div>
+          <div class="form-group">
+            <label for="editarColaboradorSobrenome"><span class="perguntaObrigatoria">*</span>Sobrenome</label>
+            <input type="text" class="form-control" name="lastName" id="editarColaboradorSobrenome" maxlength="255" required />
+          </div>
+          <div class="form-group">
+            <label for="editarColaboradorEmail"><span class="perguntaObrigatoria">*</span>Login</label>
+            <input type="email" class="form-control" name="email" id="editarColaboradorEmail" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Colaborador.editar()" id="btn-editarColaborador" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Aguarde" type="button">Editar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-cotaBonus" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Cadastrar cota extra</h4>
+        <div class="divLineTitle"></div>
+      </div>
+      <form id="form-cotaBonus" method="post">
+        <div class="modal-body">
+          <input type="hidden" name="colaboradorId" id="cotaBonusColaboradorId" required />
+          <div class="form-group">
+            <label for="cotaBonusNumCotas"><span class="perguntaObrigatoria">*</span>Quantidade</label>
+            <input type="number" class="form-control" name="numCotas" min="1" id="cotaBonusNumCotas" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="Colaborador.cadastrarCotaBonus()" id="btn-cotaBonus" class="btn btn-sucesso" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Aguarde" type="button">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="modal fade" id="modal-excluirColaborador" tabindex="-1" role="dialog">
+  <div class="modal-dialog modalPersonalizado modalExcluir" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Excluir colaborador</h4>
+      </div>
+      <form id="form-excluirColaborador" method="post">
+        <div class="modal-body">
+          <input type="hidden" name="id" id="excluirColaboradorId">
+          <h3>Você tem certeza que deseja excluir esse colaborador? Todas as publicações que estiverem vinculadas a ele também serão removidas!</h3>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" id="btn-cancelarExcluirColaborador" class="btn btn-danger" data-loading-text="Cancelar">Cancelar</button>
+          <button onclick="Colaborador.excluir()" id="btn-excluirColaborador" class="btn btn-danger" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Aguarde" type="button">Excluir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<script src="/content/admin/js/servicos.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(e) {
+    e.preventDefault();
+    Servicos.consultar();
+  });
+</script>

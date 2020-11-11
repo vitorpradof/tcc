@@ -1,0 +1,113 @@
+<section class="larguraMaxima">
+  <div class="alinhar-esquerda">
+    <div class="box box-xs">
+      <div id="progress-cotasContratadas" class="alinhar-centro"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+      <div id="card-cotasContratadas" style="display: none">
+        <div style="position: relative">
+          <div style="position: absolute; right: 5px; top: 5px;"><i class="fas fa-chart-pie fa-lg"></i></div>
+          <div style="font-size: 30px; font-weight: 600;">
+            <div id="div-cotasContratadas"></div>
+          </div>
+          <div>Total de cotas: <span id="span-cotasContratadas"></span></div>
+          <div style="width: 50px; height: 5px; background-color: #36A2EB ; margin: 10px 0px;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="box box-xs">
+      <div id="progress-valorFaturado" class="alinhar-centro"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+      <div id="card-valorFaturado" style="display: none">
+        <div style="position: relative">
+          <div style="position: absolute; right: 5px; top: 5px;"><i class="fas fa-dollar-sign fa-lg"></i></div>
+          <div style="font-size: 30px; font-weight: 600;">
+            R$ <span id="span-valorFaturado"></span>
+          </div>
+          <div>Valor faturado</div>
+          <div style="width: 50px; height: 5px; background-color: #2dce89; margin: 10px 0px;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="box box-xs">
+      <div id="progress-valorAPagar" class="alinhar-centro"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+      <div id="card-valorAPagar" style="display: none">
+        <div style="position: relative">
+          <div style="position: absolute; right: 5px; top: 5px;"><i class="fas fa-file-invoice-dollar fa-lg"></i></div>
+          <div style="font-size: 30px; font-weight: 600;">
+            R$ <span id="span-valorAPagar"></span>
+          </div>
+          <div>Valor a ser pago | <span style="color: #ff9800">R$ <span id="span-valorUnitarioCota"></span></span> por cota</div>
+          <div style="width: 50px; height: 5px; background-color: #f5365c; margin: 10px 0px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="aBox box-md">
+        <div>
+          <h4>O seu faturamento por plano</h4>
+          <div class="divLineTitle"></div>
+        </div>
+        <div id="progressFaturamentoPlano" class="alinhar-centro"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+        <div id="tableFaturamentoPlano" class="tableWithoutPadding"></div>
+      </div>
+    </div>
+    <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+      <div class="rBox">
+        <div id="progress-assinaturasRealizadas" class="alinhar-centro"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+        <div id="card-assinaturasRealizadas" style="display: none">
+          <div style="font-size: 45px; font-weight: 600;" class="alinhar-coluna">
+            <div class="alinhar-centro">
+              <span id="span-assinaturasRealizadas"></span>
+              <div style="color: #2dce89; margin-left: 10px;" class="animate__animated animate__slideInUp"><i class="fas fa-long-arrow-alt-up"></i></div>
+            </div>
+            <span style="font-size: 12px; font-weight: 100; text-align: center;">ASSINATURAS <br/> NOVAS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+      <div class="rBox">
+        <div id="progress-assinaturasCanceladas" class="alinhar-centro"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+        <div id="card-assinaturasCanceladas" style="display: none">
+          <div style="font-size: 45px; font-weight: 600;" class="alinhar-coluna">
+            <div class="alinhar-centro">
+              <span id="span-assinaturasCanceladas"></span>
+              <div style="color: #f5365c; margin-left: 10px;" class="animate__animated animate__slideInDown"><i class="fas fa-long-arrow-alt-down"></i></div>
+            </div>
+            <span style="font-size: 12px; font-weight: 100; text-align: center;">ASSINATURAS <br/> CANCELADAS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row hidden-xs">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="aBox box-md">
+        <div><h4>Histórico de assinaturas</h4><div class="divLineTitle"></div></div>
+        <div id="progress-signatureHistory" class="alinhar-centro"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+        <canvas id="graph-signatureHistory" height="100" ></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="row hidden-xs">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="aBox box-md">
+        <div><h4>Histórico de cotas extras contratadas</h4><div class="divLineTitle"></div></div>
+        <div id="progress-extraQuoteHistory" class="alinhar-centro"><img src="/content/site/shared/imagens/Rolling.gif" width="50" height="50"/></div>
+        <canvas id="graph-extraQuoteHistory" height="100" ></canvas>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script src="/content/admin/js/faturamento.js?v=22102020"></script>
+<script src="/content/admin/js/grafico-donut.js?v=20102020"></script>
+<script src="/content/admin/js/grafico-assinaturas.js?v=20102020.1"></script>
+<script src="/content/admin/js/grafico-cotaExtra.js?v=20102020"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(e) {
+    e.preventDefault();
+    Faturamento.iniciar();
+  });
+</script>
